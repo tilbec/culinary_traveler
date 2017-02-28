@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h3>Follow #<%= @follow.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>User</dt>
+      <dd><%= @follow.user_id %></dd>
+
+      <dt>City</dt>
+      <dd><%= @follow.city_id %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/follows" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/follows/<%= @follow.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_follow/<%= @follow.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

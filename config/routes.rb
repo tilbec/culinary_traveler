@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for the Follow resource:
+  # CREATE
+  get "/follows/new", :controller => "follows", :action => "new"
+  post "/create_follow", :controller => "follows", :action => "create"
+
+  # READ
+  get "/follows", :controller => "follows", :action => "index"
+  get "/follows/:id", :controller => "follows", :action => "show"
+
+  # UPDATE
+  get "/follows/:id/edit", :controller => "follows", :action => "edit"
+  post "/update_follow/:id", :controller => "follows", :action => "update"
+
+  # DELETE
+  get "/delete_follow/:id", :controller => "follows", :action => "destroy"
+  #------------------------------
+
   # Routes for the Comment resource:
   # CREATE
   get "/comments/new", :controller => "comments", :action => "new"
