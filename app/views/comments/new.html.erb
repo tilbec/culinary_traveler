@@ -24,7 +24,7 @@
           Recipe
         </label>
 
-        <input type="text" id="recipe_id" name="recipe_id" placeholder="Recipe" class="form-control" value="<%= @comment.recipe_id %>">
+        <%= select_tag(:recipe_id, options_from_collection_for_select(Recipe.all, :id, :name, @comment.recipe_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for user_id -->
