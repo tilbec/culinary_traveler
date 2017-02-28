@@ -26,12 +26,14 @@
       <a href="/recipes" class="btn btn-primary">
         Back
       </a>
-      <a href="/recipes/<%= @recipe.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_recipe/<%= @recipe.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
+      <% if current_user == @recipe.user %>
+        <a href="/recipes/<%= @recipe.id %>/edit" class="btn btn-warning">
+          Edit
+        </a>
+        <a href="/delete_recipe/<%= @recipe.id %>" class="btn btn-danger" rel="nofollow">
+          Delete
+        </a>
+      <% end %>
     </div>
   </div>
 </div>

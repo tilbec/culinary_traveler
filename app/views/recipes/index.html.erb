@@ -26,8 +26,11 @@
         <td><%= recipe.city.country_id %></td>
         <td>
           <a href="/recipes/<%= recipe.id %>" class="btn btn-primary">Show</a>
-          <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_recipe/<%= recipe.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          
+          <% if current_user == recipe.user %>
+            <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_recipe/<%= recipe.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
         </td>
       </tr>
       <% end %>
