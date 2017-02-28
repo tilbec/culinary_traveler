@@ -1,6 +1,8 @@
 class Recipe < ApplicationRecord
   # Direct associations
 
+  belongs_to :city
+
   belongs_to :user,
              :counter_cache => true
 
