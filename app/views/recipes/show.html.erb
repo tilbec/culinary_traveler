@@ -15,10 +15,22 @@
       <dd><%= @recipe.image %></dd>
 
       <dt>User</dt>
-      <dd><%= @recipe.user_id %></dd>
+      <dd>
+        <% if @recipe.user.present? %>
+          <a href="/users/<%= @recipe.user_id %>">
+            <%= @recipe.user.email %>
+          </a>
+        <% end %>
+      </dd>
 
       <dt>City</dt>
-      <dd><%= @recipe.city_id %></dd>
+      <dd>
+        <% if @recipe.city.present? %>
+          <a href="/cities/<%= @recipe.city_id %>">
+            <%= @recipe.city.country_id %>
+          </a>
+        <% end %>
+      </dd>
 
     </dl>
 
