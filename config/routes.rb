@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => "cities#index"
   # Routes for the Follow resource:
   # CREATE
   get "/follows/new", :controller => "follows", :action => "new"
