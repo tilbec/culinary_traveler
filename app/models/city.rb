@@ -1,6 +1,9 @@
 class City < ApplicationRecord
   # Direct associations
 
+  belongs_to :country,
+             :counter_cache => true
+
   has_many   :follows,
              :dependent => :destroy
 
