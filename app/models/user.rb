@@ -12,6 +12,10 @@ class User < ApplicationRecord
 
   # Indirect associations
 
+  has_many   :commented_recipes,
+             :through => :comments,
+             :source => :recipe
+
   # Validations
 
   # Include default devise modules. Others available are:
