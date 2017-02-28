@@ -6,6 +6,8 @@ class CitiesController < ApplicationController
   end
 
   def show
+    @follow = Follow.new
+    @recipe = Recipe.new
     @city = City.find(params[:id])
 
     render("cities/show.html.erb")
