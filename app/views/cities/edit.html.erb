@@ -24,7 +24,7 @@
           Country
         </label>
 
-        <input type="text" id="country_id" name="country_id" placeholder="Country" class="form-control" value="<%= @city.country_id %>">
+        <%= select_tag(:country_id, options_from_collection_for_select(Country.all, :id, :name, @city.country_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for image -->
