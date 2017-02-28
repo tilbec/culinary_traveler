@@ -16,7 +16,7 @@
 
       <% @follows.each do |follow| %>
       <tr>
-        <td><%= follow.user_id %></td>
+        <td><%= follow.user.email %></td>
         <td><%= follow.city_id %></td>
         <td>
           <a href="/follows/<%= follow.id %>" class="btn btn-primary">Show</a>
