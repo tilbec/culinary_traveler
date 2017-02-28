@@ -1,6 +1,7 @@
 class CountriesController < ApplicationController
   def index
-    @countries = Country.page(params[:page]).per(10)
+    @q = Country.ransack(params[:q])
+    @countries = @q.result(:distinct => true).includes(:cities).page(params[:page]).per(10)
 
     render("countries/index.html.erb")
   end
