@@ -14,11 +14,6 @@
   </div>
 
 <div class="form-group">
-    <%= f.label :image_cont, "Image contains" %>
-    <%= f.text_field :image_cont, :class => "form-control", :placeholder => "Image contains" %>
-  </div>
-
-<div class="form-group">
     <%= f.label :description_cont, "Description contains" %>
     <%= f.text_field :description_cont, :class => "form-control", :placeholder => "Description contains" %>
   </div>
@@ -69,6 +64,11 @@
     </div>
 
 <div class="form-group">
+      <%= f.label :country_name_cont, "Country name contains" %>
+      <%= f.text_field :country_name_cont, :class => "form-control", :placeholder => "Country name contains" %>
+    </div>
+
+<div class="form-group">
       <%= f.label :commenters_email_cont, "User email contains" %>
       <%= f.text_field :commenters_email_cont, :class => "form-control", :placeholder => "User email contains" %>
     </div>
@@ -92,6 +92,7 @@
         <th>Image</th>
         <th>User</th>
         <th>City</th>
+        <th>Country</th>
         <th>Actions</th>
       </tr>
 
@@ -99,7 +100,7 @@
       <tr>
         <td><%= recipe.name %></td>
         <td><%= recipe.description %></td>
-        <td><%= recipe.image %></td>
+        <td><img src='<%= recipe.image %>' class='img-responsive'></td>
         <td>
           <% if recipe.user.present? %>
             <a href="/users/<%= recipe.user.id %>">
@@ -111,6 +112,13 @@
           <% if recipe.city.present? %>
             <a href="/cities/<%= recipe.city.id %>">
               <%= recipe.city.country_id %>
+            </a>
+          <% end %>
+        </td>
+        <td>
+          <% if recipe.country.present? %>
+            <a href="/countries/<%= recipe.country.id %>">
+              <%= recipe.country.name %>
             </a>
           <% end %>
         </td>

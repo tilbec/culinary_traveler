@@ -6,6 +6,7 @@ class CreateRecipes < ActiveRecord::Migration
       t.string :image
       t.integer :user_id
       t.integer :city_id
+      t.integer :country_id
 
       t.timestamps
 
