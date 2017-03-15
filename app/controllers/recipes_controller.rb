@@ -11,7 +11,7 @@ class RecipesController < ApplicationController
 
   def index
     @q = Recipe.ransack(params[:q])
-    @recipes = @q.result(:distinct => true).includes(:user, :city, :comments, :commenters).page(params[:page]).per(10)
+    @recipes = @q.result(:distinct => true).includes(:user, :city, :comments, :country, :commenters).page(params[:page]).per(10)
 
     render("recipes/index.html.erb")
   end
@@ -37,6 +37,7 @@ class RecipesController < ApplicationController
     @recipe.image = params[:image]
     @recipe.user_id = params[:user_id]
     @recipe.city_id = params[:city_id]
+    @recipe.country_id = params[:country_id]
 
     save_status = @recipe.save
 
@@ -68,6 +69,7 @@ class RecipesController < ApplicationController
     @recipe.image = params[:image]
     @recipe.user_id = params[:user_id]
     @recipe.city_id = params[:city_id]
+    @recipe.country_id = params[:country_id]
 
     save_status = @recipe.save
 

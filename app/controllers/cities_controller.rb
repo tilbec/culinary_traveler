@@ -26,6 +26,7 @@ class CitiesController < ApplicationController
     @city.country_id = params[:country_id]
     @city.image = params[:image]
     @city.description = params[:description]
+    @city.name = params[:name]
 
     save_status = @city.save
 
@@ -55,6 +56,7 @@ class CitiesController < ApplicationController
     @city.country_id = params[:country_id]
     @city.image = params[:image]
     @city.description = params[:description]
+    @city.name = params[:name]
 
     save_status = @city.save
 
