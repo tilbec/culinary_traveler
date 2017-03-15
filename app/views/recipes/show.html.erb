@@ -12,7 +12,7 @@
       <dd><%= @recipe.description %></dd>
 
       <dt>Image</dt>
-      <dd><%= @recipe.image %></dd>
+      <dd><img src="<%= @recipe.image %>" class="img-responsive"></dd>
 
       <dt>User</dt>
       <dd>
@@ -28,6 +28,15 @@
         <% if @recipe.city.present? %>
           <a href="/cities/<%= @recipe.city_id %>">
             <%= @recipe.city.country_id %>
+          </a>
+        <% end %>
+      </dd>
+
+      <dt>Country</dt>
+      <dd>
+        <% if @recipe.country.present? %>
+          <a href="/countries/<%= @recipe.country_id %>">
+            <%= @recipe.country.name %>
           </a>
         <% end %>
       </dd>

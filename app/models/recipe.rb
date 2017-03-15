@@ -1,5 +1,9 @@
 class Recipe < ApplicationRecord
+  mount_uploader :image, ImageUploader
+
   # Direct associations
+
+  belongs_to :country
 
   has_many   :comments,
              :dependent => :destroy
