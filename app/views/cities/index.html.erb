@@ -9,6 +9,11 @@
       <p class="lead">Narrow results:</p>
 
         <div class="form-group">
+    <%= f.label :name_cont, "Name contains" %>
+    <%= f.text_field :name_cont, :class => "form-control", :placeholder => "Name contains" %>
+  </div>
+
+<div class="form-group">
     <%= f.label :description_cont, "Description contains" %>
     <%= f.text_field :description_cont, :class => "form-control", :placeholder => "Description contains" %>
   </div>
@@ -85,6 +90,7 @@
         <th>Country</th>
         <th>Image</th>
         <th>Description</th>
+        <th>Name</th>
         <th>Actions</th>
       </tr>
 
@@ -99,6 +105,7 @@
         </td>
         <td><%= city.image %></td>
         <td><%= city.description %></td>
+        <td><%= city.name %></td>
         <td>
           <a href="/cities/<%= city.id %>" class="btn btn-primary">Show</a>
           <a href="/cities/<%= city.id %>/edit" class="btn btn-warning">Edit</a>

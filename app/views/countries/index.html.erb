@@ -63,7 +63,10 @@
           });
       </script>
 
-        
+        <div class="form-group">
+      <%= f.label :recipes_name_cont, "Recipe name contains" %>
+      <%= f.text_field :recipes_name_cont, :class => "form-control", :placeholder => "Recipe name contains" %>
+    </div>
 
       <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
