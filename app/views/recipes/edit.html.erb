@@ -14,7 +14,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <form action="/update_recipe/<%= @recipe.id %>" method="post">
+    <form enctype="multipart/form-data" action="/update_recipe/<%= @recipe.id %>" method="post">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
@@ -42,11 +42,11 @@
           Image
         </label>
 
-        <input type="text" id="image" name="image" placeholder="Image" class="form-control" value="<%= @recipe.image %>">
+        <input type="file" id="image" name="image" placeholder="Image" class="form-control" value="<%= @recipe.image %>">
       </div>
 
-      
-      
+      <!-- Label and input for user_id -->
+      <input type="hidden" name="user_id" value="<%= current_user.id %>">
 
       <!-- Label and input for city_id -->
       <div class="form-group">
@@ -54,7 +54,7 @@
           City
         </label>
 
-        <%= select_tag(:city_id, options_from_collection_for_select(City.all, :id, :country_id, @recipe.city_id), :class => "form-control") %>
+        <%= select_tag(:city_id, options_from_collection_for_select(City.order("name ASC").all, :id, :name, @recipe.city_id), :class => "form-control") %>
       </div>
 
       <button class="btn btn-warning">

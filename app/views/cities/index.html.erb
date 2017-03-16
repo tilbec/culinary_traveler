@@ -57,6 +57,9 @@
         <td><%= city.description %></td>
 
         <td>
+
+        <a href="/cities/<%= city.id %>" class="btn btn-primary">Show</a>
+        <p></p>
         <% if @follows.include? city.id %>
           <% @follow = city.follows.where(:user_id => current_user.id).ids.first %>
           <a href="/delete_follow/<%= @follow %>" class="btn btn-danger" rel="nofollow">Unfollow</a>
@@ -75,8 +78,6 @@
               </button>
             </form>
           <% end %>
-          <p></p>
-          <a href="/cities/<%= city.id %>/edit" class="btn btn-warning">Edit</a>
 
         </td>
       </tr>

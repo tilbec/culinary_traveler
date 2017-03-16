@@ -29,6 +29,8 @@
         <td><img src="<%= follow.city.image %>" width="210"></td>
         <td><%= follow.city.description %></td>
         <td>
+          <a href="/cities/<%= follow.city_id %>" class="btn btn-primary">Show</a>
+          <p></p>
           <a href="/delete_follow/<%= follow.id %>" class="btn btn-danger" rel="nofollow">Unfollow</a>
         </td>
       </tr>

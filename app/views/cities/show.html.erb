@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h3><%= @city.name%>, <a href="countries/<%= @city.country_id %>"><%= @city.country.name %></a></h3>
+  <h3><%= @city.name%>, <a href="/countries/<%= @city.country_id %>"><%= @city.country.name %></a></h3>
 </div>
 
 <div class="container">
@@ -88,13 +88,7 @@
 
     <div class="btn-group btn-group-justified">
       <a href="/cities" class="btn btn-primary">
-        Back
-      </a>
-      <a href="/cities/<%= @city.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_city/<%= @city.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
+        Back to All Cities
       </a>
     </div>
   </div>

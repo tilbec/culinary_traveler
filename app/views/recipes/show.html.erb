@@ -1,6 +1,6 @@
 <div class="page-header">
   <h3><%= @recipe.name %> in <a href="cities/<%= @recipe.city_id %>"><%= @recipe.city.name %>,</a> <a href="countries/<%= @recipe.city.country_id%>"> <%= @recipe.city.country.name %></a> <small>by
-  <a href="users/<%= @recipe.user.username %>"><%= @recipe.user.username %></a></small>
+  <a href="/users/<%= @recipe.user_id %>"><%= @recipe.user.username %></a></small>
   </h3>
 </div>
 
