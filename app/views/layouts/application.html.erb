@@ -41,13 +41,9 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/follows">Follows</a></li>
-          <li><a href="/comments">Comments</a></li>
-          <li><a href="/countries">Countries</a></li>
-          <li><a href="/recipes">Recipes</a></li>
-          <li><a href="/cities">Cities</a></li>
-          <li><a href="/users">Users</a></li>
-          <li><a href="/rails/info">Sitemap</a></li>
+          <li><a href="/recipes">Recipes in My Cities</a></li>
+          <li><a href="/follows">My Cities</a></li>
+          <li><a href="/users/<%= current_user.id %>">My Recipes</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -99,4 +95,3 @@
     <%= yield %>
   </div>
 </body>
-</html>

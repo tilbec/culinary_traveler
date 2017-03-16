@@ -7,5 +7,6 @@ class Country < ApplicationRecord
   # Indirect associations
 
   # Validations
+  validates :name, :presence => true
 
 end

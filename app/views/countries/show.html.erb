@@ -1,32 +1,12 @@
 <div class="page-header">
-  <h3>Country #<%= @country.id %></h3>
+  <h3><%= @country.name %></h3>
 </div>
 
 <div class="row">
   <div class="col-md-12 mb-2">
-    <dl class="dl-horizontal">
-      <dt>Name</dt>
-      <dd><%= @country.name %></dd>
 
-      <dt>Map</dt>
-      <dd><%= @country.map %></dd>
+      <td><img src="<%= @country.map %>"></td>
 
-      <dt>Description</dt>
-      <dd><%= @country.description %></dd>
-
-    </dl>
-
-    <div class="btn-group btn-group-justified">
-      <a href="/countries" class="btn btn-primary">
-        Back
-      </a>
-      <a href="/countries/<%= @country.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_country/<%= @country.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
-    </div>
   </div>
 </div>
 
@@ -42,7 +22,7 @@
       <% @country.cities.each do |city| %>
         <li class="list-group-item">
           <a href="/cities/<%= city.id %>">
-            <%= city.country_id %>
+            <%= city.name %>
           </a>
           <div class="btn-group btn-group-xs pull-right">
             <a href="/cities/<%= city.id %>" class="btn btn-primary">
@@ -57,6 +37,9 @@
           </div>
         </li>
       <% end %>
+      <li class="list-group-item list-group-item-info">
+      Add New City
+      </li>
 
       <li class="list-group-item">
         <form action="/create_city" method="post">

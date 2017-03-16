@@ -2,6 +2,7 @@ class CitiesController < ApplicationController
   def index
     @q = City.ransack(params[:q])
     @cities = @q.result(:distinct => true).includes(:recipes, :follows, :country).page(params[:page]).per(10)
+    @follows = Follow.where(:user_id => current_user.id).pluck(:city_id)
 
     render("cities/index.html.erb")
   end
@@ -26,6 +27,7 @@ class CitiesController < ApplicationController
     @city.country_id = params[:country_id]
     @city.image = params[:image]
     @city.description = params[:description]
+    @city.name = params[:name]
 
     save_status = @city.save
 

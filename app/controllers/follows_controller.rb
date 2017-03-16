@@ -3,6 +3,8 @@ class FollowsController < ApplicationController
     @q = Follow.ransack(params[:q])
     @follows = @q.result(:distinct => true).includes(:user, :city).page(params[:page]).per(10)
 
+    @follow_list = Follow.all
+
     render("follows/index.html.erb")
   end
 

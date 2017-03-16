@@ -10,5 +10,7 @@ class Comment < ApplicationRecord
   # Indirect associations
 
   # Validations
-
+  validates :user_id, :presence => true
+  validates :recipe_id, :presence => true
+  validates :comment, :presence => true
 end

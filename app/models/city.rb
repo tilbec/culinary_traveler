@@ -13,5 +13,7 @@ class City < ApplicationRecord
   # Indirect associations
 
   # Validations
+  validates :country_id, :presence => true
+  validates :name, :presence => true, :uniqueness => { :scope => :country }
 
 end

@@ -1,59 +1,25 @@
 <div class="page-header">
-  <h3>Recipe #<%= @recipe.id %></h3>
+  <h3><%= @recipe.name %> in <a href="cities/<%= @recipe.city_id %>"><%= @recipe.city.name %>,</a> <a href="countries/<%= @recipe.city.country_id%>"> <%= @recipe.city.country.name %></a> <small>by
+  <a href="users/<%= @recipe.user.username %>"><%= @recipe.user.username %></a></small>
+  </h3>
 </div>
 
-<div class="row">
-  <div class="col-md-12 mb-2">
-    <dl class="dl-horizontal">
-      <dt>Name</dt>
-      <dd><%= @recipe.name %></dd>
-
-      <dt>Description</dt>
-      <dd><%= @recipe.description %></dd>
-
-      <dt>Image</dt>
-      <dd><%= @recipe.image %></dd>
-
-      <dt>User</dt>
-      <dd>
-        <% if @recipe.user.present? %>
-          <a href="/users/<%= @recipe.user_id %>">
-            <%= @recipe.user.email %>
-          </a>
-        <% end %>
-      </dd>
-
-      <dt>City</dt>
-      <dd>
-        <% if @recipe.city.present? %>
-          <a href="/cities/<%= @recipe.city_id %>">
-            <%= @recipe.city.country_id %>
-          </a>
-        <% end %>
-      </dd>
-
-    </dl>
-
-    <div class="btn-group btn-group-justified">
-      <a href="/recipes" class="btn btn-primary">
-        Back
-      </a>
-      <% if current_user == @recipe.user %>
-        <a href="/recipes/<%= @recipe.id %>/edit" class="btn btn-warning">
-          Edit
-        </a>
-        <a href="/delete_recipe/<%= @recipe.id %>" class="btn btn-danger" rel="nofollow">
-          Delete
-        </a>
-      <% end %>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-offset-1 col-sm-4">
+        <img src="<%= @recipe.image %>" class="img-responsive">
+      </div>
+      <div class="col-sm-6">
+        <h4><%= @recipe.description %></h4>
+      </div>
     </div>
-  </div>
 </div>
 
+<div class="col-xs-12" style="height:70px;"></div>
 <!-- A Recipe has many comments -->
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-sm-offset-1 col-sm-10">
     <ul class="list-group">
       <li class="list-group-item list-group-item-info">
         Comments
@@ -61,20 +27,11 @@
 
       <% @recipe.comments.each do |comment| %>
         <li class="list-group-item">
-          <a href="/comments/<%= comment.id %>">
-            <%= comment.recipe_id %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/comments/<%= comment.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/comments/<%= comment.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_comment/<%= comment.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
+          <a href="/users/<%= comment.user_id %>"><%= comment.user.username %></a>
+          <small>
+            <%= time_ago_in_words(comment.created_at) %> ago
+          </small>
+          <p><%= comment.comment %></p>
         </li>
       <% end %>
 
@@ -107,33 +64,21 @@
   </div>
 </div>
 
-<!-- A Recipe has many commenters -->
 
 <div class="row">
-  <div class="col-md-12">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-info">
-        Commenters
-      </li>
-
-      <% @recipe.commenters.each do |user| %>
-        <li class="list-group-item">
-          <a href="/users/<%= user.id %>">
-            <%= user.email %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/users/<%= user.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/users/<%= user.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_user/<%= user.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
-        </li>
+  <div class="col-sm-offset-1 col-sm-10">
+    <div class="btn-group btn-group-justified">
+      <a href="/recipes" class="btn btn-primary">
+        Back
+      </a>
+      <% if current_user == @recipe.user %>
+        <a href="/recipes/<%= @recipe.id %>/edit" class="btn btn-warning">
+          Edit
+        </a>
+        <a href="/delete_recipe/<%= @recipe.id %>" class="btn btn-danger" rel="nofollow">
+          Delete
+        </a>
       <% end %>
-    </ul>
+    </div>
   </div>
 </div>

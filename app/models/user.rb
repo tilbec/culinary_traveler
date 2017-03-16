@@ -11,12 +11,13 @@ class User < ApplicationRecord
              :dependent => :destroy
 
   # Indirect associations
-
   has_many   :commented_recipes,
              :through => :comments,
              :source => :recipe
 
   # Validations
+  validates :username, :presence => true, :uniqueness => true
+  validates :email, :presence => true, :uniqueness => true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

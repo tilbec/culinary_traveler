@@ -1,28 +1,40 @@
 <div class="page-header">
-  <h3>User #<%= @user.id %></h3>
+  <h3><%= @user.username %></h3>
 </div>
 
 <div class="row">
-  <div class="col-md-12 mb-2">
-    <dl class="dl-horizontal">
-      <dt>Email</dt>
-      <dd><%= @user.email %></dd>
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Name</th>
+        <th>City</th>
+        <th>Image</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
 
-      <dt>Password</dt>
-      <dd><%= @user.password %></dd>
+      <% @recipe_list.each do |recipe| %>
+      <tr>
+        <td><a href="/recipes/<%= recipe.id %>"><%= recipe.name %></a></td>
+        <td><a href="cities/<%= recipe.city_id %>"><%= recipe.city.name %>, <%= recipe.city.country.name %></a></td>
+        <td><img src="<%= recipe.image %>" width="200"></td>
+        <td><%= recipe.description %></td>
 
-      <dt>Username</dt>
-      <dd><%= @user.username %></dd>
+        <td>
+          <a href="/recipes/<%= recipe.id %>" class="btn btn-primary">Show</a>
 
-    </dl>
-
-    <div class="btn-group btn-group-justified">
-      <a href="/users" class="btn btn-primary">
-        Back
-      </a>
-    </div>
+          <% if current_user == recipe.user %>
+            <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_recipe/<%= recipe.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
   </div>
 </div>
+
+
 
 <!-- A User has many recipes -->
 

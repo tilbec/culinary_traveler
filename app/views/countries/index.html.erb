@@ -63,7 +63,7 @@
           });
       </script>
 
-        
+
 
       <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
@@ -88,7 +88,7 @@
       <% @countries.each do |country| %>
       <tr>
         <td><%= country.name %></td>
-        <td><%= country.map %></td>
+        <td><img src="<%= country.map %>"</td>
         <td><%= country.description %></td>
         <td>
           <a href="/countries/<%= country.id %>" class="btn btn-primary">Show</a>

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root :to => "cities#index"
+  root :to => "recipes#index"
   # Routes for the Follow resource:
   # CREATE
   get "/follows/new", :controller => "follows", :action => "new"

@@ -13,6 +13,17 @@ class RecipesController < ApplicationController
     @q = Recipe.ransack(params[:q])
     @recipes = @q.result(:distinct => true).includes(:user, :city, :comments, :commenters).page(params[:page]).per(10)
 
+    @follows = Follow.where(:user_id => current_user.id).pluck(:city_id)
+    recipes = Recipe.all
+
+    @recipe_list = []
+
+    recipes.each do |recipe|
+      if @follows.include? recipe.city_id
+        @recipe_list.push(recipe)
+      else
+      end
+    end
     render("recipes/index.html.erb")
   end
 

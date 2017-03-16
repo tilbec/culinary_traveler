@@ -1,45 +1,24 @@
 <div class="page-header">
-  <h3>City #<%= @city.id %></h3>
+  <h3><%= @city.name%>, <a href="countries/<%= @city.country_id %>"><%= @city.country.name %></a></h3>
 </div>
 
-<div class="row">
-  <div class="col-md-12 mb-2">
-    <dl class="dl-horizontal">
-      <dt>Country</dt>
-      <dd>
-        <% if @city.country.present? %>
-          <a href="/countries/<%= @city.country_id %>">
-            <%= @city.country.name %>
-          </a>
-        <% end %>
-      </dd>
-
-      <dt>Image</dt>
-      <dd><%= @city.image %></dd>
-
-      <dt>Description</dt>
-      <dd><%= @city.description %></dd>
-
-    </dl>
-
-    <div class="btn-group btn-group-justified">
-      <a href="/cities" class="btn btn-primary">
-        Back
-      </a>
-      <a href="/cities/<%= @city.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_city/<%= @city.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-offset-1 col-sm-4">
+        <img src="<%= @city.image %>" class="img-responsive">
+      </div>
+      <div class="col-sm-6">
+        <p><%= @city.description %></p>
+      </div>
     </div>
-  </div>
 </div>
+
+<div class="col-xs-12" style="height:70px;"></div>
 
 <!-- A City has many recipes -->
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-sm-offset-1 col-sm-10">
     <ul class="list-group">
       <li class="list-group-item list-group-item-info">
         Recipes
@@ -50,22 +29,15 @@
           <a href="/recipes/<%= recipe.id %>">
             <%= recipe.name %>
           </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/recipes/<%= recipe.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_recipe/<%= recipe.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
         </li>
       <% end %>
 
+      <li class="list-group-item list-group-item-info">
+        Add a New Recipe to <%= @city.name %>
+      </li>
+
       <li class="list-group-item">
-        <form action="/create_recipe" method="post">
+      <form enctype="multipart/form-data" action="/create_recipe" method="post">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
@@ -93,7 +65,7 @@
           Image
         </label>
 
-        <input type="text" id="image" name="image" placeholder="Image" class="form-control" value="">
+        <input type="file" id="image" name="image" placeholder="Image" class="form-control" value="">
       </div>
 
       <!-- Label and input for user_id -->
@@ -111,56 +83,19 @@
   </div>
 </div>
 
-<!-- A City has many follows -->
-
 <div class="row">
-  <div class="col-md-12">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-info">
-        Follows
-      </li>
+  <div class="col-sm-offset-1 col-sm-10">
 
-      <% @city.follows.each do |follow| %>
-        <li class="list-group-item">
-          <a href="/follows/<%= follow.id %>">
-            <%= follow.user_id %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/follows/<%= follow.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/follows/<%= follow.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_follow/<%= follow.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
-        </li>
-      <% end %>
-
-      <li class="list-group-item">
-        <form action="/create_follow" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
-      <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
-
-        <%= select_tag(:user_id, options_from_collection_for_select(User.all, :id, :email), :class => "form-control") %>
-      </div>
-
-      <!-- Label and input for city_id -->
-      <input type="hidden" name="city_id" value="<%= @city.id %>">
-
-      <button class="btn btn-block btn-success">
-        Create Follow
-      </button>
-    </form>
-      </li>
-    </ul>
+    <div class="btn-group btn-group-justified">
+      <a href="/cities" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/cities/<%= @city.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_city/<%= @city.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
   </div>
 </div>

@@ -1,76 +1,29 @@
 <div class="page-header">
   <h1>
     Cities
-    <a href="/cities/new" class="btn btn-lg btn-success">New City</a>
+    <a href="/cities/new" class="btn btn-lg btn-success">Add New City</a>
   </h1>
 </div><div class="row mb-1">
   <div class="col-md-12">
     <%= search_form_for @q, :class => collapse_search_form, :id => "cities_filters" do |f| %>
       <p class="lead">Narrow results:</p>
 
-        <div class="form-group">
-    <%= f.label :description_cont, "Description contains" %>
-    <%= f.text_field :description_cont, :class => "form-control", :placeholder => "Description contains" %>
-  </div>
-
-<div class="form-group">
-    <%= f.label :image_cont, "Image contains" %>
-    <%= f.text_field :image_cont, :class => "form-control", :placeholder => "Image contains" %>
-  </div>
-
-<div class="form-group">
-          <%= f.label :created_at, "Created at" %>
-          <div class="row">
-            <div class='col-md-6 mb-1'>
-              <div class='input-group date' id='created_atgteqPicker'>
-                  <%= f.text_field :created_at_gteq, :class => "form-control", :placeholder => "Created at greater than or equal to" %>
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-            </div>
-
-            <div class='col-md-6'>
-              <div class='input-group date' id='created_atlteqPicker'>
-                  <%= f.text_field :created_at_lteq, :class => "form-control", :placeholder => "Created at less than or equal to" %>
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-            </div>
-          </div>
-      </div>
-      <script type="text/javascript">
-          $(function () {
-              $('#created_atgteqPicker').datetimepicker({
-                  format: 'YYYY-MM-DD hh:mm:SS'
-              });
-              $('#created_atlteqPicker').datetimepicker({
-                  useCurrent: false,
-                  format: 'YYYY-MM-DD hh:mm:SS'
-              });
-              $('#created_atgteqPicker').on("dp.change", function (e) {
-                  $('#created_atlteqPicker').data("DateTimePicker").minDate(e.date);
-              });
-              $('#created_atlteqPicker').on("dp.change", function (e) {
-                  $('#created_atgteqPicker').data("DateTimePicker").maxDate(e.date);
-              });
-          });
-      </script>
-
-        <div class="form-group">
-      <%= f.label :recipes_name_cont, "Recipe name contains" %>
-      <%= f.text_field :recipes_name_cont, :class => "form-control", :placeholder => "Recipe name contains" %>
+    <div class="form-group">
+    <%= f.label :name_cont, "Name contains" %>
+    <%= f.text_field :name_cont, :class => "form-control", :placeholder => "Name contains" %>
     </div>
 
-<div class="form-group">
+    <div class="form-group">
       <%= f.label :country_name_cont, "Country name contains" %>
       <%= f.text_field :country_name_cont, :class => "form-control", :placeholder => "Country name contains" %>
     </div>
 
-      <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
-
-      <a href="/cities" class="btn btn-default btn-block mb-1">Clear filters</a>
+    <div class="form-group">
+    <%= f.label :description_cont, "Description contains" %>
+    <%= f.text_field :description_cont, :class => "form-control", :placeholder => "Description contains" %>
+    </div>
+    <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
+    <a href="/cities" class="btn btn-default btn-block mb-1">Clear filters</a>
     <% end %>
     <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#cities_filters">
       Show Filters
@@ -82,27 +35,49 @@
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
-        <th>Country</th>
+        <th>City</th>
         <th>Image</th>
         <th>Description</th>
         <th>Actions</th>
       </tr>
 
-      <% @cities.each do |city| %>
+      <% @cities.order("name ASC").each do |city| %>
       <tr>
         <td>
           <% if city.country.present? %>
+            <a href="/cities/<%= city.id %>">
+              <%= city.name %>,
+            </a>
             <a href="/countries/<%= city.country.id %>">
               <%= city.country.name %>
             </a>
           <% end %>
         </td>
-        <td><%= city.image %></td>
+        <td><img src="<%= city.image %>" width="210"></td>
         <td><%= city.description %></td>
+
         <td>
-          <a href="/cities/<%= city.id %>" class="btn btn-primary">Show</a>
+        <% if @follows.include? city.id %>
+          <% @follow = city.follows.where(:user_id => current_user.id).ids.first %>
+          <a href="/delete_follow/<%= @follow %>" class="btn btn-danger" rel="nofollow">Unfollow</a>
+        <% else %>
+
+            <form action="/create_follow" method="post">
+              <!-- Hidden input for authenticity token to protect from forgery -->
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+              <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+
+              <input type="hidden" id="city_id" name="city_id" placeholder="City" class="form-control" value="<%= city.id %>">
+
+              <button class="btn btn-success">
+                Follow
+              </button>
+            </form>
+          <% end %>
+          <p></p>
           <a href="/cities/<%= city.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_city/<%= city.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+
         </td>
       </tr>
       <% end %>

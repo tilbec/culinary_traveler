@@ -24,7 +24,16 @@
           Country
         </label>
 
-        <%= select_tag(:country_id, options_from_collection_for_select(Country.all, :id, :name, @city.country_id), :class => "form-control") %>
+        <%= select_tag(:country_id, options_from_collection_for_select(Country.order("name ASC").all, :id, :name, @city.country_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @city.name %>">
       </div>
 
       <!-- Label and input for image -->
@@ -33,7 +42,7 @@
           Image
         </label>
 
-        <input type="text" id="image" name="image" placeholder="Image" class="form-control" value="<%= @city.image %>">
+        <input type="text" id="image" name="image" placeholder="Image: Please paste URL to a descriptive image of the city" class="form-control" value="<%= @city.image %>">
       </div>
 
       <!-- Label and input for description -->
