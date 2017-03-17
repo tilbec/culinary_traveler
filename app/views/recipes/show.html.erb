@@ -31,6 +31,17 @@
           <small>
             <%= time_ago_in_words(comment.created_at) %> ago
           </small>
+          <% if comment.user_id == current_user.id %>
+          <div class="btn-group btn-group-xs pull-right">
+          <a href="/comments/<%= comment.id %>/edit" class="btn btn-warning">
+            <i class="fa fa-edit"></i>
+          </a>
+          <a href="/delete_comment/<%= comment.id %>" class="btn btn-danger" rel="nofollow">
+            <i class="fa fa-trash-o"></i>
+          </a>
+          </div>
+          <% else %>
+          <% end %>
           <p><%= comment.comment %></p>
         </li>
       <% end %>

@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   get "/follows/:id", :controller => "follows", :action => "show"
 
   # UPDATE
-  get "/follows/:id/edit", :controller => "follows", :action => "edit"
-  post "/update_follow/:id", :controller => "follows", :action => "update"
+  #get "/follows/:id/edit", :controller => "follows", :action => "edit"
+  #post "/update_follow/:id", :controller => "follows", :action => "update"
 
   # DELETE
   get "/delete_follow/:id", :controller => "follows", :action => "destroy"
@@ -25,8 +25,8 @@ Rails.application.routes.draw do
   post "/create_comment", :controller => "comments", :action => "create"
 
   # READ
-  get "/comments", :controller => "comments", :action => "index"
-  get "/comments/:id", :controller => "comments", :action => "show"
+  #get "/comments", :controller => "comments", :action => "index"
+  #get "/comments/:id", :controller => "comments", :action => "show"
 
   # UPDATE
   get "/comments/:id/edit", :controller => "comments", :action => "edit"
@@ -80,11 +80,11 @@ Rails.application.routes.draw do
   get "/cities/:id", :controller => "cities", :action => "show"
 
   # UPDATE
-  get "/cities/:id/edit", :controller => "cities", :action => "edit"
-  post "/update_city/:id", :controller => "cities", :action => "update"
+  #get "/cities/:id/edit", :controller => "cities", :action => "edit"
+  #post "/update_city/:id", :controller => "cities", :action => "update"
 
   # DELETE
-  get "/delete_city/:id", :controller => "cities", :action => "destroy"
+  #get "/delete_city/:id", :controller => "cities", :action => "destroy"
   #------------------------------
 
   devise_for :users

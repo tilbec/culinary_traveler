@@ -71,12 +71,12 @@ class CommentsController < ApplicationController
 
       case referer
       when "/comments/#{@comment.id}/edit", "/update_comment"
-        redirect_to("/comments/#{@comment.id}", :notice => "Comment updated successfully.")
+        redirect_to("/recipes/#{@comment.recipe.id}", :notice => "Comment updated successfully.")
       else
         redirect_back(:fallback_location => "/", :notice => "Comment updated successfully.")
       end
     else
-      render("comments/edit.html.erb")
+      render("/recipes/#{@comment.recipe.id}")
     end
   end
 
