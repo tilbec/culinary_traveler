@@ -3,7 +3,71 @@
     Cities
     <a href="/cities/new" class="btn btn-lg btn-success">Add New City</a>
   </h1>
-</div><div class="row mb-1">
+</div>
+  <style>
+  #map {
+    width: 600px;
+    height: 300px;
+  }
+  </style>
+
+<div class="row">
+  <div class="col-sm-offset-3 col-sm-6">
+  <div id="map"></div>
+  <script>
+  function initMap() {
+    // initiate a new map
+    var mapDiv = document.getElementById('map');
+    var map = new google.maps.Map(mapDiv);
+
+    // An empty bounds variable for seeting automatic zoom level (bounds of map)
+    var bounds = new google.maps.LatLngBounds();
+
+    <%  @places.each do |place|   %>
+
+    // Make info window for this place
+    var infowindow_<%= place.id %> = new google.maps.InfoWindow({
+      content: "<b><%= place.name %></b>"  +
+      "<p><%= place.description %></p> "
+    });
+
+    // Make marker for this place
+    var marker_<%= place.id %> = new google.maps.Marker({
+      position: {lat: <%= place.lat %>, lng: <%= place.lng %>},
+      map: map,
+      title: "<%= place.name %>",
+      icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+    });
+
+    // Click to show info window
+    marker_<%= place.id %>.addListener('click', function() {
+      infowindow_<%= place.id %>.open(map, marker_<%= place.id %>);
+    });
+
+    // Rightclick to edit place
+    marker_<%= place.id %>.addListener('rightclick', function() {
+      window.location.href = 'http://localhost:3000/places/<%= place.id %>/edit'
+
+    });
+
+    // Add this marker in map bounds
+    bounds.extend(new google.maps.LatLng(<%= place.lat %>, <%= place.lng %>));
+
+    <% end %>
+
+    // Size map to fit bounds
+    map.fitBounds(bounds);
+  };
+
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+  async defer></script>
+</div>
+</div>
+
+<div class="col-xs-12" style="height:30px;"></div>
+
+<div class="row mb-1">
   <div class="col-md-12">
     <%= search_form_for @q, :class => collapse_search_form, :id => "cities_filters" do |f| %>
       <p class="lead">Narrow results:</p>

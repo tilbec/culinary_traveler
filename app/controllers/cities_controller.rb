@@ -1,9 +1,19 @@
 class CitiesController < ApplicationController
+
+  def address_to_geo(address)
+    require 'open-uri'
+    url = 'http://maps.googleapis.com/maps/api/geocode/json?address=' + URI.encode(address)
+    parsed_data = JSON.parse(open(url).read)
+    lat = parsed_data["results"][0]["geometry"]["location"]["lat"]
+    lng = parsed_data["results"][0]["geometry"]["location"]["lng"]
+    return [lat,lng]
+  end
+
   def index
     @q = City.ransack(params[:q])
     @cities = @q.result(:distinct => true).includes(:recipes, :follows, :country).page(params[:page]).per(10)
     @follows = Follow.where(:user_id => current_user.id).pluck(:city_id)
-
+    @places = City.all
     render("cities/index.html.erb")
   end
 
@@ -29,9 +39,12 @@ class CitiesController < ApplicationController
     @city.description = params[:description]
     @city.name = params[:name]
 
-    save_status = @city.save
+    address = params[:name]+ "," + @city.country.name
+    latlng = address_to_geo(address)
+    @city.lat = latlng[0]
+    @city.lng = latlng[1]
 
-    
+    save_status = @city.save
 
     if save_status == true
         f = Follow.new

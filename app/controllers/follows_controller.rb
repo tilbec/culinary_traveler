@@ -4,6 +4,14 @@ class FollowsController < ApplicationController
     @follows = @q.result(:distinct => true).includes(:user, :city).page(params[:page]).per(10)
 
     @follow_list = Follow.all
+    @places = []
+
+    @follow_list.each do |follow|
+      if follow.user.id == current_user.id
+        @places.push(follow.city)
+      else
+      end
+    end
 
     render("follows/index.html.erb")
   end
