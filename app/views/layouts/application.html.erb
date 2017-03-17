@@ -41,16 +41,19 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+          <% if current_user.present? %>
           <li><a href="/recipes"><i class="fa fa-binoculars" aria-hidden="true"></i> Recipes in My Cities</a></li>
           <li><a href="/follows"><i class="fa fa-globe" aria-hidden="true"></i> My Cities</a></li>
           <li><a href="/users/<%= current_user.id %>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> My Recipes</a></li>
+          <% else %>
+          <% end %>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
           <% if current_user.present? %>
             <li>
               <a href="/users/edit">
-                <%= current_user.email %>
+                <%= current_user.username %>
               </a>
             </li>
 

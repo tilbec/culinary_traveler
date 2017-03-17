@@ -17,17 +17,19 @@
       <% @recipe_list.each do |recipe| %>
       <tr>
         <td><a href="/recipes/<%= recipe.id %>"><%= recipe.name %></a></td>
-        <td><a href="cities/<%= recipe.city_id %>"><%= recipe.city.name %>, <%= recipe.city.country.name %></a></td>
+        <td><a href="/cities/<%= recipe.city_id %>"><%= recipe.city.name %>,</a> <a href="/countries/<%= recipe.city.country_id %>"> <%= recipe.city.country.name %></a></td>
         <td><img src="<%= recipe.image %>" width="200"></td>
         <td><%= recipe.description %></td>
 
         <td>
           <a href="/recipes/<%= recipe.id %>" class="btn btn-primary">Show</a>
-
+          <p></p>
           <% if current_user == recipe.user %>
-            <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-warning">Edit</a>
-            <a href="/delete_recipe/<%= recipe.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <a href="/recipes/<%= recipe.id %>/edit" class="btn btn-warning">Edit</a>
+          <p></p>
+          <a href="/delete_recipe/<%= recipe.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
           <% end %>
+
         </td>
       </tr>
       <% end %>

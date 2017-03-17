@@ -5,6 +5,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @recipe_list = Recipe.where(:user_id => current_user.id)
+    @recipe_list = Recipe.where(:user_id => @user.id)
   end
 end

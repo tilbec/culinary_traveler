@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="page-header">
-  <h3>Add Recipe</h3>
+  <h3>Add New Recipe</h3>
 </div>
 
 <div class="row">
@@ -54,7 +54,9 @@
           City
         </label>
         <%= select_tag(:city_id, options_from_collection_for_select(City.order("name ASC").all, :id, :name, @recipe.city_id), :class => "form-control") %>
+        or <a href="/cities/new">Add New City</a>
       </div>
+
 
       <button class="btn btn-success">
         Create Recipe

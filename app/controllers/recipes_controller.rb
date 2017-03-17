@@ -52,6 +52,15 @@ class RecipesController < ApplicationController
     save_status = @recipe.save
 
     if save_status == true
+      f_list = Follow.where(:user_id => current_user.id).pluck(:city_id)
+      if f_list.include? @recipe.city_id
+      else
+        f = Follow.new
+        f.user_id = current_user.id
+        f.city_id = @recipe.city_id
+        f.save
+      end
+
       referer = URI(request.referer).path
 
       case referer

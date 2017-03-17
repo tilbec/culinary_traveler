@@ -31,7 +31,14 @@ class CitiesController < ApplicationController
 
     save_status = @city.save
 
+    
+
     if save_status == true
+        f = Follow.new
+        f.user_id = current_user.id
+        f.city_id = @city.id
+        f.save
+
       referer = URI(request.referer).path
 
       case referer
